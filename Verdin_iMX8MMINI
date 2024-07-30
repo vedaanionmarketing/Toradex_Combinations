@@ -1,0 +1,147 @@
+import csv
+from itertools import product
+Number_of_Processor_Cores=["1x", "2x", "4x"]
+Memory=["512MB RAM", "1GB RAM", "2GB RAM", "4GB RAM", "8GB RAM"]
+Flash=["4GB FLASH", "8GB FLASH", "16GB FLASH", "32GB FLASH", "64GB FLASH"]
+GPU=["Yes", "No"]
+VPU=["Yes", "No"]
+WiFi_and_Bluetooth=["Yes", "No"]
+Temperature_Range=["-40C to 85C", "-25C to 85C", "0C to 70C"]
+Annual_Quantities=["1000", "3000", "6000", "10000", "50000", "100000", "200000"]
+combinations = list(product(Number_of_Processor_Cores, Memory, Flash, GPU, VPU, WiFi_and_Bluetooth, Temperature_Range, Annual_Quantities))
+with open ("Verdin_iMX8MMINI.csv", "w", newline="") as file:
+    csvwriter = csv.writer(file)
+    csvwriter.writerow(["Product Name","Product Type","Processor Manufacturer","Processor Family","Processor Sub Family","Name of Processor Core","Number of Processor Cores","Processor Clock Speed","Name of Microcontroller Core","Microcontroller Clock Speed", "Memory", "Flash", "3D GPU", "On-Board VPU", "On-Board MCU","On-Board NPU","WiFi and Bluetooth","Wireless Network","Bluetooth Network","Temperature Range","Minimum Temperature","Maximum Temperature","Annual Quantities","On-Board DSP","On-Board Graphics Engine","Ethernet","Cellular","GNSS","USB Technology","PCI-e","LVDS","UART","I2C","I3C","SPI","CAN","GPIO","SD/MMC","SDIO","PoE","RS232","RS485 / RS232","Audio_Digital Audio","Audio_I2S","Audio_SPDIF","Audio_Digital Mic","Camera Interface_MIPI-CSI 2 Lane","Camera Interface_GigE Vision","Camera Interface_CoaXPress","Display Interface_LVDS","Display Interface_DVI-D","Display Interface_2-lane MIPI DSI","Display Interface_4-lane MIPI DSI","Display Interface_Touch screen","Display Interface_Parallel RGB","Display Interface_eDP","Display Interface_HDMI","Formfactor","Dimensions_Width","Dimensions_Length","Dimensions_Height","Connector to Carrier Board","Operating System","Other_Interface_PWM","Other_Interface_JTAG","Other_Interface_ADC","Other_Interface_Digital IOs","Other_Interface_2x 12-bit DAC","Other_Interface_Timers","Other_Interface_SATA","Other_Interface_Additional Expansion Connectors","Accesories","Video Encode","Video Decode","Country of Origin"])
+    for combination in combinations:
+        csvwriter.writerow([
+        "Verdin iMX8M Mini",
+        "Module",
+        "NXP",
+        "Verdin",
+        "Not found",
+        "Arm Cortex-A53",
+        Number_of_Processor_Cores[Number_of_Processor_Cores.index(combination[0])] if combination[0] in Number_of_Processor_Cores else "Not found",
+
+        "Up to 1.8 GHz",
+
+        "Arm Cortex-M4",
+
+        "400 MHz",
+        Memory[Memory.index(combination[1])] if combination[1] in Memory else "Not found",
+        Flash[Flash.index(combination[2])] if combination[2] in Flash else "Not found",
+        GPU[GPU.index(combination[3])] if combination[3] in GPU else "Not found",
+        VPU[VPU.index(combination[4])] if combination[4] in VPU else "Not found",
+        "Yes",
+
+        "Not found",
+        WiFi_and_Bluetooth[WiFi_and_Bluetooth.index(combination[5])] if combination[5] in WiFi_and_Bluetooth else "Not found",
+        "Wi-Fi 5 (802.11ac)" if WiFi_and_Bluetooth[WiFi_and_Bluetooth.index(combination[5])] == "Yes" else "Not found",
+        "Bluetooth v5.3" if WiFi_and_Bluetooth[WiFi_and_Bluetooth.index(combination[5])] == "Yes" else "Not found",
+        Temperature_Range[Temperature_Range.index(combination[6])] if combination[6] in Temperature_Range else "Not found",
+        "-40C" if Temperature_Range[Temperature_Range.index(combination[6])] == "-40C to 85C" else "-25C" if Temperature_Range[Temperature_Range.index(combination[6])] == "-25C to 85C" else "0C",
+        "85C" if Temperature_Range[Temperature_Range.index(combination[6])] != "0C to 70C" else "70C",
+        Annual_Quantities[Annual_Quantities.index(combination[7])] if combination[7] in Annual_Quantities else "Not found",
+
+        "Not found",
+
+        "Yes",
+        
+        "Gigabit with TSN",
+
+        "Not found",
+
+        "Not found",
+
+        "USB 2.0 1x Host/1x OTG",
+
+        "PCI-e	1xPCIe Gen 2",
+
+        "Via external conversion from MIPI DSI",
+
+        "4x",
+
+        "3x",
+
+        "Not found",
+
+        "3x",
+
+        "Yes",
+
+        "98x",
+
+        "2x",
+
+        "2x",
+
+        "Not found",
+
+        "Not found",
+
+        "Not found",
+
+        "5x SAI: I2S or AC97",
+
+        "5x SAI: I2S or AC97"
+
+        "1x/1x",
+
+        "Not found",
+
+        "1x Quad Lane",
+
+        "Not found",
+
+        "Not found",
+
+        "Via external conversion from MIPI DSI",
+
+        "Not found",
+
+        "No, 1x Quad Lane MIPI DSI",
+
+        "No, 1x Quad Lane MIPI DSI",
+
+        "Not found",
+
+        "Not found",
+
+        "Not found",
+
+        "Via external conversion from MIPI DSI",
+
+        "Modern System on Module type",
+
+        "69.6 mm",
+
+        "35.0 mm",
+
+        "6.0 mm",
+
+        "Could connect to carrier boards - optional",
+
+        "Embedded Linux, FreeRTOS, Android, QNX",
+
+        "4x",
+
+        "1x",
+
+        "4x",
+
+        "Not found",
+
+        "Not found",
+
+        "Not found",
+
+        "Not found",
+
+        "Not found",
+        
+        'Optional, Verdin Industrial Heatsink Type 1, Capacitive Touch Display 10.1" LVDS, ect.',
+	
+        "Yes",
+
+        "Yes",
+
+        "Not found",])
