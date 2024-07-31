@@ -6,6 +6,8 @@ static_data = {
     "Processor Manufacturer":"NXP",
     "Processor Family":"Verdin",
     "Processor Sub Family":"Not found",
+    "Memory":"8GB RAM",
+    "Flash":"128GB FLASH",
     "Name of Processor Core":"Arm Cortex-A53",
     "Number of Processor Cores":"4",
     "Processor Clock Speed":"1.6 GHz",
@@ -71,15 +73,12 @@ onboardnpu = ["Yes", "No"]
 onboardvpu = ["Yes", "No"]
 threedgpu = ["Yes", "No"]
 isp = ["Yes", "No"]
-memory = ["1GB RAM", "2GB RAM", "4GB RAM", "8GB RAM"]
-flash = ["8GB FLASH", "16GB FLASH", "32GB FLASH", "64GB FLASH", "128GB FLASH"]
 wifiandbluetooth = ["Yes", "No"]
 temperature = ["-40C to 85C", "-25C to 85C", "0C to 70C"]
-volumequantity = ["1000", "3000", "6000", "10000", "50000", "100000", "200000"]
-combinations = list(product(onboardnpu, onboardvpu, threedgpu, isp, memory, flash, wifiandbluetooth, temperature, volumequantity))
+combinations = list(product(onboardnpu, onboardvpu, threedgpu, isp, wifiandbluetooth, temperature))
 with open("Verdin_iMX8Mplus.csv", "w", newline="") as file:
     csvwriter = csv.writer(file)
-    csvwriter.writerow(["Product Name","Product Type","Processor Manufacturer","Processor Family","Processor Sub Family","On Board NPU","On Board VPU","3D GPU","ISP","Memory","Flash","WiFi and Bluetooth","Temperature","Min Temp","Max Temp","Wireless Network - Wi-Fi","Bluetooth Newtwork","Volume Quantity","Name of Processor Core","Number of Processor Cores","Processor Clock Speed","Name of Microcontroller Core","Microcontroller Clock Speed","On-Board MCU","On-Board DSP","On-Board Graphics Engine","Ethernet","Cellular","GNSS","USB Technology","PCI-e","LVDS","UART","I2C","I3C","SPI","CAN 2.0B","GPIO","SD/MMC","SDIO","PoE","RS232","RS485 / RS232","Audio_Digital Audio","Audio_I2S","Audio_SPDIF","Audio_Digital Mic","Camera Interface_MIPI-CSI 2 Lane","Camera Interface_GigE Vision","Camera Interface_CoaXPress","Display Interface_LVDS","Display Interface_DVI-D","Display Interface_2-lane MIPI DSI","Display Interface_4-lane MIPI DSI","Display Interface_Touch screen","Display Interface_Parallel RGB","Display Interface_eDP","Display Interface_HDMI","Formfactor","Dimensions_Width","Dimensions_Length","Dimensions_Height","Connector to Carrier Board","Other_Interface_PWM","Other_Interface_JTAG","Other_Interface_ADC","Other_Interface_Digital IOs","Other_Interface_2x 12-bit DAC","Other_Interface_Timers","Other_Interface_SATA","Other_Interface_Additional Expansion Connectors","Accessories","Video Encode","Video Decode","Country of Origin"])
+    csvwriter.writerow(["Product Name","Product Type","Processor Manufacturer","Processor Family","Processor Sub Family","On Board NPU","On Board VPU","3D GPU","ISP","Memory","Flash","WiFi and Bluetooth","Temperature","Min Temp","Max Temp","Wireless Network - Wi-Fi","Bluetooth Newtwork","Name of Processor Core","Number of Processor Cores","Processor Clock Speed","Name of Microcontroller Core","Microcontroller Clock Speed","On-Board MCU","On-Board DSP","On-Board Graphics Engine","Ethernet","Cellular","GNSS","USB Technology","PCI-e","LVDS","UART","I2C","I3C","SPI","CAN 2.0B","GPIO","SD/MMC","SDIO","PoE","RS232","RS485 / RS232","Audio_Digital Audio","Audio_I2S","Audio_SPDIF","Audio_Digital Mic","Camera Interface_MIPI-CSI 2 Lane","Camera Interface_GigE Vision","Camera Interface_CoaXPress","Display Interface_LVDS","Display Interface_DVI-D","Display Interface_2-lane MIPI DSI","Display Interface_4-lane MIPI DSI","Display Interface_Touch screen","Display Interface_Parallel RGB","Display Interface_eDP","Display Interface_HDMI","Formfactor","Dimensions_Width","Dimensions_Length","Dimensions_Height","Connector to Carrier Board","Other_Interface_PWM","Other_Interface_JTAG","Other_Interface_ADC","Other_Interface_Digital IOs","Other_Interface_2x 12-bit DAC","Other_Interface_Timers","Other_Interface_SATA","Other_Interface_Additional Expansion Connectors","Accessories","Video Encode","Video Decode","Country of Origin"])
     for combination in combinations:
         csvwriter.writerow(
             [static_data["Product Name"],
@@ -91,15 +90,14 @@ with open("Verdin_iMX8Mplus.csv", "w", newline="") as file:
             onboardvpu[onboardnpu.index(combination[1])] if combination[1] in onboardnpu else "Not found",
             threedgpu[threedgpu.index(combination[2])] if combination[2] in threedgpu else "Not found",
             isp[isp.index(combination[3])] if combination[3] in isp else "Not found",
-            memory[memory.index(combination[4])] if combination[4] in memory else "Not found",
-            flash[flash.index(combination[5])] if combination[5] in flash else "Not found",
-            wifiandbluetooth[wifiandbluetooth.index(combination[6])] if combination[6] in wifiandbluetooth else "Not found",
-            temperature[temperature.index(combination[7])] if combination [7] in temperature else "Not found",
-            "-40C" if temperature[temperature.index(combination[7])] == "-40C to 85C" else "-25C" if temperature[temperature.index(combination[7])] == "-25C to 85C" else "0C",
-            "85C" if temperature[temperature.index(combination[7])] == "-40C to 85C" or "-25C to 85C" else "70C",
-            "5 (802.11ac)" if wifiandbluetooth[wifiandbluetooth.index(combination[6])] == "Yes" else "Not found",
-            "Bluetooth v5.3" if wifiandbluetooth[wifiandbluetooth.index(combination[6])] == "Yes" else "Not found",
-            volumequantity[volumequantity.index(combination[8])] if combination[8] in volumequantity else "Not found",
+            static_data["Memory"],
+            static_data["Flash"],
+            wifiandbluetooth[wifiandbluetooth.index(combination[4])] if combination[4] in wifiandbluetooth else "Not found",
+            temperature[temperature.index(combination[5])] if combination[5] in temperature else "Not found",
+            "-40C" if temperature[temperature.index(combination[5])] == "-40C to 85C" else "-25C" if temperature[temperature.index(combination[5])] == "-25C to 85C" else "0C",
+            "85C" if temperature[temperature.index(combination[5])] == "-40C to 85C" or "-25C to 85C" else "70C",
+            "5 (802.11ac)" if wifiandbluetooth[wifiandbluetooth.index(combination[4])] == "Yes" else "Not found",
+            "Bluetooth v5.3" if wifiandbluetooth[wifiandbluetooth.index(combination[4])] == "Yes" else "Not found",
             static_data["Name of Processor Core"],
             static_data["Number of Processor Cores"],
             static_data["Processor Clock Speed"],
@@ -118,7 +116,7 @@ with open("Verdin_iMX8Mplus.csv", "w", newline="") as file:
             static_data["I2C"],
             static_data["I3C"],
             static_data["SPI"],
-            static_data["CAN 2.0B"],
+            static_data["CAN"],
             static_data["GPIO"],
             static_data["SD/MMC"],
             static_data["SDIO"],
